@@ -4,9 +4,9 @@
 	id				= "com.ticketmob.ticketapp"
 	version 		= "1.0.0">
 
-	<name>TicketMob Tickets</name>
+	<name>LaughStub Tickets</name>
 
-	<description>TicketMob's mobile ticket purchase application</description>
+	<description>LaughStub's mobile ticket purchase application</description>
 
 	<author href="http://www.ticketmob.com" email="jonah@ticketmob.com">Jonah Fuller</author>
 
