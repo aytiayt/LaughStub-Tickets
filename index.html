@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+	<title>TicketMob Tickets</title>
+
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/jquery.mobile.theme.css" />
+    <link rel="stylesheet" href="assets/css/jquery.mobile.structure-1.1.0.min.css" /> 
+    <link rel="stylesheet" href="assets/css/main.css" /> 
+
+	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/jquery/jquery-1.7.2.min.js"></script> 
+    <script src="assets/js/app.js"></script> 
+    <script src="assets/js/jquery/jquery.mobile-1.1.0.min.js"></script> 
+
+</head>
+
+<body>
+    
+    
+    
+
+
+	<!-- Top Upcoming Events -->
+    <div id="upcomingPage" data-role="page">
+
+        <div data-role="header" data-position="fixed">
+            <h1>Top Upcoming Events</h1>
+            <a href="loadUpcomingShows();" class="ui-btn-right" data-icon="refresh">Refresh</a>
+        </div>
+    
+        <div data-role="content" id="upcomingShows"></div>
+        
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar" data-theme="b">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Top Upcoming Events -->
+
+
+
+
+
+
+	<!-- Location Page -->
+    <div id="locationPage" data-role="page">
+
+        <div data-role="header" data-position="fixed">
+            <h1>My Location</h1>
+        </div>
+    
+        <div data-role="content" id="locationContent">
+        
+            <h3>Please Set Your Location:</h3>
+            
+            <form action="#">
+            
+                <label for="zipcode">Zip Code:</label>
+                <input type="text" name="zipcode" id="zipcode" value=""  />
+            	<input type="submit" name="updateZip" id="updateZip" value="Set Location" onclick="updateZipcode();return false;" />
+            
+            	<p align="center">- Or -</p>
+                
+                <input type="button" name="getLocation" id="getLocation" value="Use My Current Location" onclick="getCurrentLocation();" data-icon="refresh" />
+            
+            </form>
+        
+        </div>
+        
+    </div>
+    <!-- End of Location Page -->
+
+
+</body>
+</html>

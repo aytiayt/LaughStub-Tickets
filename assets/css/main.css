@@ -1,0 +1,10 @@
+
+
+
+/* footer icons */
+.ui-footer .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+.ui-footer .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+#nav-events .ui-icon { background:  url(../img/calendar.png) 50% 50% no-repeat; background-size: 23px 26px; }
+#nav-venues .ui-icon { background:  url(../img/bank.png) 50% 50% no-repeat; background-size: 26px 23px;  }
+#nav-artists .ui-icon { background:  url(../img/user.png) 50% 50% no-repeat;  background-size: 24px 22px; }
+#nav-account .ui-icon { background:  url(../img/id-card.png) 50% 50% no-repeat;  background-size: 24px 18px; }
