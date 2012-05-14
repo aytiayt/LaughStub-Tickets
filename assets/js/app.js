@@ -2,6 +2,19 @@
 
 
 
+/* Application Variables */
+
+var db;
+var appSettings = {
+		currLat: 0,
+		currLong: 0,
+		userID: 0,
+		brandProperty: "LS",
+		dataAPI: "http://www.ticketmob.com/components/iosAPI.cfc",
+		online: navigator.onLine || false
+	};
+
+
 
 
 $(document).bind("mobileinit", function() {
@@ -15,18 +28,61 @@ $(document).bind("mobileinit", function() {
 	
 });
 
+$(document).bind("deviceready", function() {
+
+	onDeviceReady();
+
+});
+
+$(document).bind("pageinit", function() {
+	
+	//onDeviceReady();
+	
+});
 
 
-var db;
-var appSettings = {
-		currLat: 0,
-		currLong: 0,
-		userID: 0,
-		brandProperty: "LS",
-		dataAPI: "http://www.ticketmob.com/components/iosAPI.cfc"
-	};
+$(function() {
+	
+	// console.log(appSettings);
 
-document.addEventListener("deviceready", onDeviceReady, false);
+});
+
+
+
+
+function onDeviceReady() {
+	
+	navigator.geolocation.getCurrentPosition(
+		function(position) {
+			appSettings.currLat = position.coords.latitude;
+			appSettings.currLong = position.coords.longitude;
+			loadUpcomingShows();
+			//updateLocation(position.coords.latitude,position.coords.longitude);
+		},
+		function (error) {
+			console.log('code: ' + error.code    + '\n' + 'message: ' + error.message + '\n');
+		}
+	);
+	
+	//navigator.network.isReachable('ticketmob.com', reachableCallback);
+	
+}
+
+function reachableCallback(reachability) {
+    // There is no consistency on the format of reachability
+    var networkState = reachability.code || reachability;
+
+    var states = {};
+    states[NetworkStatus.NOT_REACHABLE]                      = 'No network connection';
+    states[NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK] = 'Carrier data connection';
+    states[NetworkStatus.REACHABLE_VIA_WIFI_NETWORK]         = 'WiFi connection';
+
+    // console.log('Connection type: ' + states[networkState]);
+	if(networkState != 0) { appSettings.online = true; }
+}
+
+
+/*
 function onDeviceReady() {
 	createDB();
 }
@@ -45,7 +101,6 @@ function dbNotEmpty(tx, result){
 	appSettings.currLat = userData.currLat;
 	appSettings.currLong = userData.currLong;
 	appSettings.userID = userData.userID;
-	locationLoad();
 }
 function populateDB(tx) {
 	tx.executeSql("DROP TABLE IF EXISTS userOptions");
@@ -89,60 +144,11 @@ var updateLocation = function(latitude,longitude) {
 	
 }
 
+*/
 
 
 
 
-
-
-$(document).bind("pageinit", function() {
-	
-	
-	
-});
-
-
-$(function() {
-	
-	// onDeviceReady();
-
-});
-
-
-
-
-var getCurrentLocation = function() {
-	navigator.geolocation.getCurrentPosition(
-		function(position) {
-			appSettings.currLat = position.coords.latitude;
-			appSettings.currLong = position.coords.longitude;
-			updateLocation(position.coords.latitude,position.coords.longitude);
-			/*
-			Latitude: 			position.coords.latitude          
-			Longitude:        	position.coords.longitude         
-			Altitude:        	position.coords.altitude          
-			Accuracy:       	position.coords.accuracy          
-			Altitude Accuracy:	position.coords.altitudeAccuracy  
-			Heading:         	position.coords.heading          
-			Speed:           	position.coords.speed            
-			Timestamp:			new Date(position.timestamp)     
-			*/
-			
-			locationLoad();
-		},
-		function (error) {
-			console.log('code: ' + error.code    + '\n' + 'message: ' + error.message + '\n');
-		}
-	);
-}
-
-var locationLoad = function() {
-	
-	// Called after location succesfully set
-	$.mobile.changePage($("#upcomingPage"));
-	loadUpcomingShows();
-
-}
 
 var loadUpcomingShows = function() {
 
