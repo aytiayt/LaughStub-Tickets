@@ -177,7 +177,7 @@ var displayShow = function(showTimingID) {
 	$.getJSON(apiCallURL('getShow',apiData), function(data) {
 		
 		if(data.SUCCESS) {
-			$('#showDisplay').html(data.HTML).trigger("create");
+			$('#showDisplay').html(data.HTML).trigger('create');
 			$.mobile.changePage($('#showPage'));
 		}
 		

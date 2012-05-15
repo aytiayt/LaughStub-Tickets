@@ -58,7 +58,6 @@ div.venue div.map { position: absolute; top: 20px; right: 0; }
 div.showHeader p { line-height: 18px; margin: 0; border-top: 1px dashed #aaa; padding: 10px 110px 0 0; }
 div.showHeader p.address { font-size: 12px; line-height: 16px; padding: 0 110px 0 0; border-top: none; }
 div.showCart { padding: 15px; }
-
 div.showCart table { width: 100%; border-collapse: collapse; }
 div.showCart th { text-align: left; }
 div.showCart table thead th { text-align:left; }
@@ -69,6 +68,6 @@ div.showCart table tfoot th,
 div.showCart table tfoot td { border-bottom: none; }
 div.showCart table tfoot #buyPageTotal { font-size: 16px; text-align: left; font-weight: bold; color: #2489CE; }
 
-
+div.showArtists { padding: 15px; }
 
 
