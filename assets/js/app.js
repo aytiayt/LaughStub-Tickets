@@ -28,11 +28,7 @@ $(document).bind("mobileinit", function() {
 	
 });
 
-$(document).bind("deviceready", function() {
-
-	onDeviceReady();
-
-});
+document.addEventListener("deviceready", onDeviceReady, false);
 
 $(document).bind("pageinit", function() {
 	
@@ -191,6 +187,47 @@ var displayShow = function(showTimingID) {
 	
 }
 
+
+var displayVenue = function(venueID) {
+	
+	var apiData = {
+		venueID: venueID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.getJSON(apiCallURL('getVenue',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#venueDisplay').html(data.HTML).trigger("create");
+			$.mobile.changePage($('#venuePage'));
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
+
+
+var displayArtist = function(artistID) {
+	
+	var apiData = {
+		artistID: artistID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.getJSON(apiCallURL('getArtist',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#artistDisplay').html(data.HTML).trigger("create");
+			$.mobile.changePage($('#artistPage'));
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
 
 
 var apiCallURL = function(method,data) {

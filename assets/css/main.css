@@ -23,9 +23,16 @@
 
 
 
+/* Show List */
+#upcomingShows h3.ui-li-heading { margin: 0.3em 0; }
+#upcomingShows p.ui-li-desc span.showDate { color: #2489CE; }
+
+
+
 /* Show Details Page */
 #showDisplay { padding: 0; }
-div.showHeader { 
+div.showHeader,
+div.showDetails { 
 	padding: 15px; 
 	-moz-box-shadow: 0 0 15px #bbb inset; 
 	-webkit-box-shadow: 0 0 15px #bbb inset; 
@@ -41,17 +48,27 @@ div.showHeader {
 	background-image:      -o-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/);
  }
- 
+div.showDetails { font-weight: normal; font-size: 14px; }
 div.headerInfo { margin: 0 0 0 85px; }
 div.showHeader img { width: 73px; height: 73px; border: 1px solid #fff; float: left; }
 div.showHeader h3 { margin: 0 0 5px 0; }
 div.showHeader h4 { margin: 0; color: #2489CE; }
 div.venue { clear: left; padding: 10px 0 0 0; position: relative; }
 div.venue div.map { position: absolute; top: 20px; right: 0; }
-div.showHeader p { line-height: 18px; margin: 0; padding: 10px 0 0 0; border-top: 1px dashed #aaa; }
-div.showHeader p.address { font-size: 12px; line-height: 16px; padding: 0; border-top: none; }
+div.showHeader p { line-height: 18px; margin: 0; border-top: 1px dashed #aaa; padding: 10px 110px 0 0; }
+div.showHeader p.address { font-size: 12px; line-height: 16px; padding: 0 110px 0 0; border-top: none; }
 div.showCart { padding: 15px; }
-div.showDetails { padding: 15px; }
+
+div.showCart table { width: 100%; border-collapse: collapse; }
+div.showCart th { text-align: left; }
+div.showCart table thead th { text-align:left; }
+div.showCart table th, 
+div.showCart table td { font-size: 14px; padding: 3px 2px 3px 0; border-bottom: 1px solid #ddd; } 
+div.showCart table tfoot th { font-size: 16px; text-align: right; }
+div.showCart table tfoot th,
+div.showCart table tfoot td { border-bottom: none; }
+div.showCart table tfoot #buyPageTotal { font-size: 16px; text-align: left; font-weight: bold; color: #2489CE; }
+
 
 
 

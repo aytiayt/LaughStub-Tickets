@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="assets/css/jquery.mobile.structure-1.1.0.min.css" /> 
     <link rel="stylesheet" href="assets/css/main.css" /> 
 
-	<script src="assets/js/phonegap.js" type="text/javascript" charset="utf-8"></script>
+	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="assets/js/phonegap.js" type="text/javascript" charset="utf-8"></script>-->
     <script src="assets/js/jquery/jquery-1.7.2.min.js"></script> 
     <script src="assets/js/app.js"></script> 
     <script src="assets/js/jquery/jquery.mobile-1.1.0.min.js"></script> 
@@ -69,6 +70,62 @@
         
     </div>
     <!-- End of Show Page -->
+
+
+
+
+
+	<!-- Venue Page -->
+    <div id="venuePage" data-role="page">
+
+        <div data-role="header" data-position="fixed">
+            <a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+            <h1>Venue Info</h1>
+        </div>
+    
+        <div data-role="content" id="venueDisplay"></div>
+        
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building" data-theme="b">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Venue Page -->
+
+
+
+
+
+	<!-- Artist Page -->
+    <div id="artistPage" data-role="page">
+
+        <div data-role="header" data-position="fixed">
+            <a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+            <h1>Artist Profile</h1>
+        </div>
+    
+        <div data-role="content" id="artistDisplay"></div>
+        
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user" data-theme="b">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Artist Page -->
 
 
 
