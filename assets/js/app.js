@@ -36,7 +36,7 @@ $(document).bind("deviceready", function() {
 
 $(document).bind("pageinit", function() {
 	
-	onDeviceReady();
+	// onDeviceReady();
 	
 });
 
@@ -182,7 +182,7 @@ var displayShow = function(showTimingID) {
 		
 		if(data.SUCCESS) {
 			$('#showDisplay').html(data.HTML).trigger("create");
-			$.mobile.changePage($('#showPage'), {transition: "slide"});
+			$.mobile.changePage($('#showPage'));
 		}
 		
 		$.mobile.hidePageLoadingMsg();
