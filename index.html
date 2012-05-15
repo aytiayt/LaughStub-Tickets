@@ -22,8 +22,8 @@
     <div id="upcomingPage" data-role="page">
 
         <div data-role="header" data-position="fixed">
-            <h1>Top Upcoming Events</h1>
-            <a href="#" onclick="loadUpcomingShows();" class="ui-btn-right" data-icon="refresh">Refresh</a>
+            <h1>Top Events</h1>
+            <a href="#" onclick="loadUpcomingShows();" class="ui-btn-right" data-icon="refresh" data-iconpos="notext">Refresh</a>
         </div>
     
         <div data-role="content" id="upcomingShows"></div>
@@ -41,6 +41,34 @@
         
     </div>
     <!-- End of Top Upcoming Events -->
+
+
+
+
+
+	<!-- Show Page -->
+    <div id="showPage" data-role="page">
+
+        <div data-role="header" data-position="fixed">
+            <a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+            <h1>Details</h1>
+        </div>
+    
+        <div data-role="content" id="showDisplay"></div>
+        
+        <div data-role="footer" data-position="fixed">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar" data-theme="b">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Show Page -->
 
 
 

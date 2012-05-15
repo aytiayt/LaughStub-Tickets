@@ -36,7 +36,7 @@ $(document).bind("deviceready", function() {
 
 $(document).bind("pageinit", function() {
 	
-	//onDeviceReady();
+	onDeviceReady();
 	
 });
 
@@ -169,6 +169,29 @@ var loadUpcomingShows = function() {
 	});
 	
 }
+
+
+var displayShow = function(showTimingID) {
+	
+	var apiData = {
+		showTimingID: showTimingID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.getJSON(apiCallURL('getShow',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#showDisplay').html(data.HTML).trigger("create");
+			$.mobile.changePage($('#showPage'), {transition: "slide"});
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
+
+
 
 var apiCallURL = function(method,data) {
 	
