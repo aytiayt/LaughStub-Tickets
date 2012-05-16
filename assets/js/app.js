@@ -32,7 +32,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 $(document).bind("pageinit", function() {
 	
-	onDeviceReady();
+	//onDeviceReady();
 	
 	
 });
