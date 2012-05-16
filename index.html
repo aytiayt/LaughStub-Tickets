@@ -6,7 +6,7 @@
 	<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/jquery.mobile.theme.css" />
-    <link rel="stylesheet" href="assets/css/jquery.mobile.structure-1.1.0.min.css" /> 
+    <link rel="stylesheet" href="assets/css/jquery.mobile.structure-1.1.0.min.css" />
     <link rel="stylesheet" href="assets/css/main.css" /> 
 
 	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
@@ -61,6 +61,121 @@
             <div data-role="navbar" data-grid="c">
                 <ul>
                     <li><a href="#upcomingPage" id="nav-events" data-icon="calendar" data-theme="b">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Show Page -->
+
+
+
+
+
+	<!-- Cart Page -->
+    <div id="cartPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <h1>Checkout</h1>
+        </div>
+    
+        <div data-role="content" id="cartDisplay">
+        
+        	<h2>Order Details</h2>
+        	<div id="shoppingCart"></div>
+        
+        	<form id="checkoutForm">
+            
+            	<input type="hidden" name="checkoutShowTierList" id="checkoutShowTierList" value="" />
+            	<input type="hidden" name="checkoutShowTierIDList" id="checkoutShowTierIDList" value="" />
+            	<input type="hidden" name="checkoutShowTierQtyList" id="checkoutShowTierQtyList" value="" />
+            	<input type="hidden" name="checkoutShowTimingID" id="checkoutShowTimingID" value="0" />
+            	<input type="hidden" name="checkoutCouponID" id="checkoutCouponID" value="0" />
+            	<input type="hidden" name="checkoutTotal" id="checkoutTotal" value="0" />
+                
+                <h2>Personal Information</h2>
+                <div id="ticketDetails">
+                
+                    <label for="firstName">Name</label>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <input type="text" name="firstName" id="firstName" onkeyup="updateCCName();" value="" placeholder="First Name" />
+                        </div>
+                        <div class="ui-block-b">
+                            <input thype="text" name="lastName" id="lastName" onkeyup="updateCCName();" value="" placeholder="Last Name" />
+                        </div>
+                    </div>
+                    <label for="emailAddress">Email</label>
+                    <input type="email" name="emailAddress" id="emailAddress" value="" placeholder="me@email.com" />
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" name="phoneNumber" id="phoneNumber" value="" placeholder="XXX-XXX-XXXX" />
+                
+                </div>
+                
+                <h2>Payment Information</h2>
+                <div id="paymentDetails">
+                    
+                    <label for="cardName">Name on Card</label>
+                    <input thype="text" name="cardName" id="cardName" value="" />
+                
+                    <label for="cardNumber">Card Number</label>
+                    <input type="number" name="cardNumber" id="cardNumber" value="" maxlength="16" />
+                    
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <label for="expMo">Expiration</label>
+                            <select name="expMo" id="expMo">
+                                <option value="1">1 - Jan</option>
+                                <option value="2">2 - Feb</option>
+                                <option value="3">3 - Mar</option>
+                                <option value="4">4 - Apr</option>
+                                <option value="5">5 - May</option>
+                                <option value="6">6 - Jun</option>
+                                <option value="7">7 - Jul</option>
+                                <option value="8">8 - Aug</option>
+                                <option value="9">9 - Sep</option>
+                                <option value="10">10 - Oct</option>
+                                <option value="11">11 - Nov</option>
+                                <option value="12">12 - Dec</option>
+                            </select>
+                        </div>
+                        <div class="ui-block-b">
+                            <label for="expYr">&nbsp;</label>
+                            <select name="expYr" id="expYr"></select>
+                        </div>
+                    </div>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <label for="billingZip">Billing Zipcode</label>
+                            <input thype="text" name="billingZip" id="billingZip" value="" />
+                        </div>
+                        <div class="ui-block-b">
+                            <label for="cardCVV">CVV</label>
+                            <input type="number" name="cardCVV" id="cardCVV" value="" maxlength="4" />
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <div class="ui-body ui-body-a">
+                
+                    <input type="button" name="completeOrder" id="completeOrder" onclick="doCheckout();" value="Complete Order" data-theme="b" />
+                    
+                    <h6>By Clicking "Complete Order" You Agree to Our <a href="#purchasePolicy">Purchase Policy.</a></h6>
+                
+                </div>
+        	
+            </form>
+        
+        </div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
                     <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
                     <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
                     <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
@@ -156,6 +271,24 @@
             </form>
         
         </div>
+        
+    </div>
+    <!-- End of Location Page -->
+
+
+
+
+
+
+	<!-- Purchase Policy -->
+    <div id="purchasePolicy" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+            <h1>Purchase Policy</h1>
+        </div>
+    
+        <div data-role="content" id="purchasePolicyContent"></div>
         
     </div>
     <!-- End of Location Page -->

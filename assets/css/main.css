@@ -1,4 +1,7 @@
 
+/* Loader */
+.ui-loader { background-color: #fff!important; top: 0!important; left: 0!important; width: 100%!important; height: 100%!important; margin: 0!important; border-radius: 0!important; padding: 50%!important; }
+.ui-loader .ui-icon-loading { margin-left: -22px; }
 
 
 /* footer icons */
@@ -71,4 +74,61 @@ div.showCart table tfoot #buyPageTotal { font-size: 16px; text-align: left; font
 
 div.showArtists { padding: 15px; }
 #showArtistList { margin-top: 15px; }
+
+
+
+
+
+/* Checkout Page */
+#cartDisplay input.ui-input-text { width: 92%; }
+#cartDisplay .ui-grid-a input.ui-input-text { width: 82%; }
+#cartDisplay .ui-grid-a div.ui-select { width: 92%; }
+#cartDisplay { padding: 0; }
+#shoppingCart,
+#paymentDetails,
+#ticketDetails {
+	padding: 15px; 
+	-moz-box-shadow: 0 0 15px #bbb inset; 
+	-webkit-box-shadow: 0 0 15px #bbb inset; 
+	box-shadow: 0 0 15px #bbb inset;
+	background: #dfdfdf /*{c-bhover-background-color}*/;
+	font-weight: normal;
+	color: #2F3E46 /*{c-bhover-color}*/;
+	text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ #ffffff /*{c-bhover-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #f6f6f6 /*{c-bhover-background-start}*/), to( #e0e0e0 /*{c-bhover-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/);
+
+}
+#cartDisplay h2 {
+	margin: 0;
+	padding: .5em 15px;
+	font-size: 16px;
+	border: 1px solid #456f9a /*{b-bar-border}*/;
+	background: #5e87b0 /*{b-bar-background-color}*/;
+	color: #fff /*{b-bar-color}*/;
+	font-weight: bold;
+	text-shadow: 0 /*{b-bar-shadow-x}*/ 1px /*{b-bar-shadow-y}*/ 1px /*{b-bar-shadow-radius}*/ #3e6790 /*{b-bar-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #6facd5 /*{b-bar-background-start}*/), to( #497bae /*{b-bar-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/);
+}
+
+#shoppingCart table { width: 100%; border-collapse: collapse; }
+#shoppingCart td { font-size: 14px; padding: 3px; border-top: 1px solid #ccc; }
+#shoppingCart td.value { text-align: right; }
+#shoppingCart tr.total td { font-size: 20px; font-weight: bold; padding-top: 5px; border-top: 1px solid #aaa; }
+
+#shoppingCart h4 { color: #2489CE; margin: 0; }
+#shoppingCart p { font-size: 14px; margin: 0 0 10px 0; }
+#cartDisplay #couponCode { width: 63%; display: inline-block;  margin: 15px 0 0 0; }
+
+.messageBox { margin: 0 0 10px 0; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+.messageBox p { font-size: 16px; font-weight: bold; text-align: center; height: 30px; line-height: 30px; }
 

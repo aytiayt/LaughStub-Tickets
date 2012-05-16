@@ -32,13 +32,16 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 $(document).bind("pageinit", function() {
 	
-	// onDeviceReady();
+	onDeviceReady();
+	
 	
 });
 
 
 $(function() {
 	
+	loadPurchasePolicy();
+	populateExpMo();
 	// console.log(appSettings);
 
 });
@@ -162,7 +165,141 @@ var updateTotal = function() {
 }
 
 
+var populateExpMo = function() {
+	// Get the current year and add 10 years for the year dropdown
+	var d = new Date();
+	var currentYear = d.getFullYear();
+	for (i=currentYear;i<=eval(currentYear+10);i++) {
+		$('#expYr').append('<option value="'+i+'">'+i+'</option>');
+	}
+	
+}
 
+
+var updateCCName = function() {
+	$('#cardName').val($('#firstName').val() + ' ' + $('#lastName').val());
+}
+
+
+
+
+var applyCoupon = function() {
+
+	var apiData = {
+		brandProperty: appSettings.brandProperty,
+		showTimingID: $('#checkoutShowTimingID').val(),
+		showTierList: $('#checkoutShowTierList').val(),
+		couponCode: $('#couponCode').val()
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('validateCoupon',apiData), function(data) {
+	
+		if(data.SUCCESS) {
+			
+			if(data.VALID) {
+				
+				$('#checkoutCouponID').val(data.COUPONID);
+				updateCart($('#checkoutShowTimingID').val(),$('#checkoutShowTierIDList').val(),$('#checkoutShowTierQtyList').val());
+			
+			} else {
+				
+				$('#checkoutCouponID').val(0);
+				$('#couponCode').val('');
+				checkoutAlert('Invalid Coupon!');
+				
+				$.mobile.hidePageLoadingMsg();
+			}
+			
+		}
+		
+	});
+
+}
+
+var removeCoupon = function() {
+	
+	$('#checkoutCouponID').val(0);
+	updateCart($('#checkoutShowTimingID').val(),$('#checkoutShowTierIDList').val(),$('#checkoutShowTierQtyList').val());
+	
+}
+
+
+
+var checkoutAlert = function(msg) {
+	
+	$('#shoppingCart').prepend('<div class="ui-body ui-body-e messageBox" id="checkoutMessage"><p>'+msg+'</p></div>');
+	window.setTimeout(function(){
+		$('#checkoutMessage').fadeOut(500,function(){
+			$(this).remove();
+		});
+	},5000);
+	
+}
+
+
+var addToCart = function() {
+
+	// Make sure there are some tickets selected
+	var showTierIDArr = new Array();
+	var showTierQtyArr = new Array();
+	
+	$('tr','#showTickets').each(function(i){
+		var showTierID = $(this).attr('id').replace('tierRow_','');
+		var ticketQty = parseInt($('#tierQty_'+showTierID).val());
+		if(ticketQty>0){
+			showTierIDArr.push(showTierID);
+			showTierQtyArr.push(ticketQty);
+		}
+	});
+	
+	if(showTierIDArr.length==0) {
+		// No tickets selected
+		alert('Please select a valid quantity of tickets to purchase.');	
+		
+	} else {
+		
+		updateCart($('#showTimingID').val(),showTierIDArr.join(),showTierQtyArr.join());
+		
+	}
+	
+}
+
+var updateCart = function(showTimingID,showTierIDList,showTierQtyList) {
+	
+	var apiData = {
+		brandProperty: appSettings.brandProperty,
+		showTimingID: showTimingID,
+		showTierIDList: showTierIDList,
+		showTierQtyList: showTierQtyList,
+		couponID: $('#checkoutCouponID').val()
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('shoppingCart',apiData), function(data) {
+	
+		if(data.SUCCESS) {
+			
+			$('#checkoutShowTierList').val(data.SHOWTIERLIST);
+			$('#checkoutShowTierIDList').val(data.SHOWTIERIDLIST);
+			$('#checkoutShowTierQtyList').val(data.SHOWTIERQTYLIST);
+			$('#checkoutShowTimingID').val(data.SHOWTIMINGID);
+			$('#checkoutCouponID').val(data.COUPONID);
+			$('#checkoutTotal').val(data.TOTAL);
+			
+			$('#shoppingCart').html(data.CARTDISPLAY).trigger("create");
+			
+			$.mobile.changePage($('#cartPage'));
+			
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
 
 
 
@@ -173,6 +310,8 @@ var loadUpcomingShows = function() {
 		long: appSettings.currLong,
 		brandProperty: appSettings.brandProperty
 	};
+	
+	$.mobile.showPageLoadingMsg();
 	
 	$.getJSON(apiCallURL('topLocalShows',apiData), function(data) {
 		
@@ -193,6 +332,8 @@ var displayShow = function(showTimingID) {
 		showTimingID: showTimingID,
 		brandProperty: appSettings.brandProperty
 	};
+	
+	$.mobile.showPageLoadingMsg();
 	
 	$.getJSON(apiCallURL('getShow',apiData), function(data) {
 		
@@ -215,6 +356,8 @@ var displayVenue = function(venueID) {
 		brandProperty: appSettings.brandProperty
 	};
 	
+	$.mobile.showPageLoadingMsg();
+	
 	$.getJSON(apiCallURL('getVenue',apiData), function(data) {
 		
 		if(data.SUCCESS) {
@@ -236,6 +379,8 @@ var displayArtist = function(artistID) {
 		brandProperty: appSettings.brandProperty
 	};
 	
+	$.mobile.showPageLoadingMsg();
+	
 	$.getJSON(apiCallURL('getArtist',apiData), function(data) {
 		
 		if(data.SUCCESS) {
@@ -244,6 +389,23 @@ var displayArtist = function(artistID) {
 		}
 		
 		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
+
+
+var loadPurchasePolicy = function(artistID) {
+	
+	var apiData = {
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.getJSON(apiCallURL('purchasePolicy',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#purchasePolicyContent').html(data.HTML);
+		}
 		
 	});
 	
