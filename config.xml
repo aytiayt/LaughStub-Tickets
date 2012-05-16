@@ -21,7 +21,7 @@
 	<preference name="orientation" value="portrait" />
 	<preference name="target-device" value="handset" />
 	<preference name="webviewbounce" value="false" />
-	<preference name="stay-in-webview" value="true" />
+	<preference name="stay-in-webview" value="false" />
 	
 	<gap:splash src="splash.png" />
 	<gap:splash src="assets/img/ios/splash.png" width="320" height="480" />
