@@ -31,7 +31,6 @@
 #upcomingShows p.ui-li-desc span.showDate { color: #2489CE; }
 
 
-
 /* Show Details Page */
 #showDisplay { padding: 0; }
 div.showHeader,
@@ -131,4 +130,93 @@ div.showArtists { padding: 15px; }
 
 .messageBox { margin: 0 0 10px 0; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
 .messageBox p { font-size: 16px; font-weight: bold; text-align: center; height: 30px; line-height: 30px; }
+
+
+
+
+
+
+
+
+
+/* Artist Details Page */
+#artistDisplay { padding: 0; }
+#artistDisplay div.artistHeader {
+	padding: 15px; 
+	height: 100px;
+	-moz-box-shadow: 0 0 15px #bbb inset; 
+	-webkit-box-shadow: 0 0 15px #bbb inset; 
+	box-shadow: 0 0 15px #bbb inset;
+	background: #dfdfdf /*{c-bhover-background-color}*/;
+	font-weight: bold;
+	color: #2F3E46 /*{c-bhover-color}*/;
+	text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ #ffffff /*{c-bhover-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #f6f6f6 /*{c-bhover-background-start}*/), to( #e0e0e0 /*{c-bhover-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/);
+}
+#artistDisplay div.artistHeader img { width: 98px; height: 98px; border: 1px solid #fff; float: left; margin: 0 10px 0 0; }
+#artistDisplay div.artistHeader h3 { margin: 0 0 5px 0; }
+#artistDisplay div.artistHeader br { clear: left; }
+#artistDisplay div.artistDetails { padding: 15px; }
+#artistDisplay div.artistDetails p { font-size: 14px; }
+
+/* Show List */
+#artistDisplay div.artistDetails h3.ui-li-heading { margin: 0.3em 0; }
+#artistDisplay div.artistDetails p.ui-li-desc span.showDate { color: #2489CE; }
+
+
+
+
+
+
+
+
+
+
+
+
+/* Ticket Details */
+#confirmationDisplay { padding: 0; }
+#confirmationDisplay h1 { margin: 0; padding: 15px; font-size: 18px; }
+div.ticketDetails div.ticketContent {
+	padding: 15px; 
+	-moz-box-shadow: 0 0 15px #bbb inset; 
+	-webkit-box-shadow: 0 0 15px #bbb inset; 
+	box-shadow: 0 0 15px #bbb inset;
+	background: #dfdfdf /*{c-bhover-background-color}*/;
+	font-weight: normal;
+	color: #2F3E46 /*{c-bhover-color}*/;
+	text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ #ffffff /*{c-bhover-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #f6f6f6 /*{c-bhover-background-start}*/), to( #e0e0e0 /*{c-bhover-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/);
+
+}
+div.ticketDetails h2 {
+	margin: 0;
+	padding: .5em 15px;
+	font-size: 16px;
+	border: 1px solid #456f9a /*{b-bar-border}*/;
+	background: #5e87b0 /*{b-bar-background-color}*/;
+	color: #fff /*{b-bar-color}*/;
+	font-weight: bold;
+	text-shadow: 0 /*{b-bar-shadow-x}*/ 1px /*{b-bar-shadow-y}*/ 1px /*{b-bar-shadow-radius}*/ #3e6790 /*{b-bar-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #6facd5 /*{b-bar-background-start}*/), to( #497bae /*{b-bar-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/);
+}
+div.ticketDetails p { font-size: 14px; margin: 0 0 5px 0; }
+
+
+
 

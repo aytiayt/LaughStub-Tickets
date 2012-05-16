@@ -11,9 +11,10 @@
 
 	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
 	<!--<script src="assets/js/phonegap.js" type="text/javascript" charset="utf-8"></script>-->
-    <script src="assets/js/jquery/jquery-1.7.2.min.js"></script> 
-    <script src="assets/js/app.js"></script> 
-    <script src="assets/js/jquery/jquery.mobile-1.1.0.min.js"></script> 
+	<script src="assets/js/validation/cfform.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/jquery/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script> 
+    <script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script> 
+    <script src="assets/js/jquery/jquery.mobile-1.1.0.min.js" type="text/javascript" charset="utf-8"></script> 
 
 </head>
 
@@ -95,6 +96,8 @@
             	<input type="hidden" name="checkoutShowTimingID" id="checkoutShowTimingID" value="0" />
             	<input type="hidden" name="checkoutCouponID" id="checkoutCouponID" value="0" />
             	<input type="hidden" name="checkoutTotal" id="checkoutTotal" value="0" />
+            	<input type="hidden" name="checkoutQty" id="checkoutQty" value="0" />
+                
                 
                 <h2>Personal Information</h2>
                 <div id="ticketDetails">
@@ -122,7 +125,7 @@
                     <input thype="text" name="cardName" id="cardName" value="" />
                 
                     <label for="cardNumber">Card Number</label>
-                    <input type="number" name="cardNumber" id="cardNumber" value="" maxlength="16" />
+                    <input type="tel" name="cardNumber" id="cardNumber" value="" maxlength="16" />
                     
                     <div class="ui-grid-a">
                         <div class="ui-block-a">
@@ -154,7 +157,7 @@
                         </div>
                         <div class="ui-block-b">
                             <label for="cardCVV">CVV</label>
-                            <input type="number" name="cardCVV" id="cardCVV" value="" maxlength="4" />
+                            <input type="tel" name="cardCVV" id="cardCVV" value="" maxlength="4" />
                         </div>
                     </div>
                     
@@ -186,6 +189,32 @@
     </div>
     <!-- End of Show Page -->
 
+
+
+
+
+	<!-- Confirmation Page -->
+    <div id="confirmationPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <h1>Confirmation</h1>
+        </div>
+    
+        <div data-role="content" id="confirmationDisplay"></div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Confirmation Page -->
 
 
 
@@ -292,6 +321,20 @@
         
     </div>
     <!-- End of Location Page -->
+
+
+
+    <!--- Alert Box --->
+    <div data-role="dialog" data-theme="b" id="alertBox">
+        <div data-role="content">
+            <div id="alertContent">
+                <h3></h3>
+                <p></p>
+                <a href="#" data-role="button" data-icon="check" data-rel="back">OK</a>
+            </div>
+        </div>
+    </div>
+
 
 
 </body>

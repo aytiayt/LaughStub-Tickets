@@ -10,7 +10,7 @@ var appSettings = {
 		currLong: 0,
 		userID: 0,
 		brandProperty: "LS",
-		dataAPI: "http://www.ticketmob.com/components/iosAPI.cfc",
+		dataAPI: "http://www.laughstub.com/components/ticketAppAPI.cfc",
 		online: navigator.onLine || false
 	};
 
@@ -32,8 +32,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 $(document).bind("pageinit", function() {
 	
-	//onDeviceReady();
-	
+	// onDeviceReady();
 	
 });
 
@@ -42,7 +41,6 @@ $(function() {
 	
 	loadPurchasePolicy();
 	populateExpMo();
-	// console.log(appSettings);
 
 });
 
@@ -60,9 +58,11 @@ function onDeviceReady() {
 		},
 		function (error) {
 			console.log('code: ' + error.code    + '\n' + 'message: ' + error.message + '\n');
+			loadUpcomingShows();
 		}
 	);
 	
+	//createDB();
 	//navigator.network.isReachable('ticketmob.com', reachableCallback);
 	
 }
@@ -82,9 +82,6 @@ function reachableCallback(reachability) {
 
 
 /*
-function onDeviceReady() {
-	createDB();
-}
 function createDB() {  
 	db = window.openDatabase("LaughStubTicketDB", "1.0", "LaughStub Tickets Local Data Storage", 200000);
 	db.transaction(verifDB, dbEmpty, function(){});
@@ -144,6 +141,14 @@ var updateLocation = function(latitude,longitude) {
 }
 
 */
+
+
+
+var showAlert = function(title,content) {
+	$('h3','#alertBox').html(title);
+	$('p','#alertBox').html(content);
+	$.mobile.changePage("#alertBox");
+}
 
 
 var updateTotal = function() {
@@ -256,7 +261,7 @@ var addToCart = function() {
 	
 	if(showTierIDArr.length==0) {
 		// No tickets selected
-		alert('Please select a valid quantity of tickets to purchase.');	
+		showAlert('Invalid Quantity','Please select a valid quantity of tickets to purchase.');	
 		
 	} else {
 		
@@ -288,6 +293,7 @@ var updateCart = function(showTimingID,showTierIDList,showTierQtyList) {
 			$('#checkoutShowTimingID').val(data.SHOWTIMINGID);
 			$('#checkoutCouponID').val(data.COUPONID);
 			$('#checkoutTotal').val(data.TOTAL);
+			$('#checkoutQty').val(data.QTY);
 			
 			$('#shoppingCart').html(data.CARTDISPLAY).trigger("create");
 			
@@ -301,6 +307,115 @@ var updateCart = function(showTimingID,showTierIDList,showTierQtyList) {
 	
 }
 
+
+var doCheckout = function() {
+	
+	//validate the checkout form
+	var errorMsg = "";
+	
+	// First and Last
+	if($('#firstName').val().length==0) {
+		errorMsg = errorMsg + "Please enter your first name<br />"	
+	}
+	if($('#lastName').val().length==0) {
+		errorMsg = errorMsg + "Please enter your last name<br />"	
+	}
+	// Email
+	if (!_CF_checkEmail($('#emailAddress').val(), true)) {
+		errorMsg = errorMsg + "Please enter a valid email address<br />"	
+	}
+	// Card Name
+	if($('#cardName').val().length==0) {
+		errorMsg = errorMsg + "Please enter the name on the credit card<br />"	
+	}
+	// Credit Card
+	if (!_CF_checkcreditcard($('#cardNumber').val(), true)) {
+		errorMsg = errorMsg + "Please enter a valid credit card number<br />";
+	}
+	// Card CVV
+	if (!_CF_checkinteger($('#cardCVV').val(), true)) {
+		errorMsg = errorMsg + "Please enter a valid credit card CVV code<br />";
+	}
+	// Billing Zip
+	if (!_CF_checkzip($('#billingZip').val(), true)) {
+		errorMsg = errorMsg + "Please enter a valid billing zip code<br />";
+	}
+	// Make sure phone is valid if entered
+	if (!_CF_checkphone($('#phoneNumber').val(), false)) {
+		errorMsg = errorMsg + "Please enter a valid phone number<br />"	
+	}
+	
+	if(errorMsg.length) {
+		
+		showAlert('Error Completing Purchase',errorMsg);
+		
+	} else {
+		
+		//Submit the form
+		var apiData = {
+			brandProperty: appSettings.brandProperty,
+			showTimingID: $('#checkoutShowTimingID').val(),
+			showTierList: $('#checkoutShowTierList').val(),
+			qty: $('#checkoutQty').val(),
+			cardName: $('#cardName').val(),
+			cardNumber: $('#cardNumber').val(),
+			cardExpiration: $('#expMo').val() + '/' + $('#expYr').val(),
+			cardCVV: $('#cardCVV').val(),
+			cardZipCode: $('#billingZip').val(),
+			checkoutTotal: $('#checkoutTotal').val(),
+			customerFirstName: $('#firstName').val(),
+			customerLastName: $('#lastName').val(),
+			customerEmailAddress: $('#emailAddress').val(),
+			customerPhoneNumber: $('#phoneNumber').val(),
+			couponID: $('#checkoutCouponID').val()			
+		};
+		
+		$.mobile.showPageLoadingMsg();
+		
+		$.getJSON(apiCallURL('buyTicket',apiData), function(data) {
+		
+			if(data.SUCCESS) {
+				
+				console.log(data);
+				if(data.ERROR==0) {
+					displayConfirmation(data.TICKETID);
+				} else {
+					showAlert('Error','An error occured completing your order.<br /><br />'+data.ERRORMSG);	
+					$.mobile.hidePageLoadingMsg();
+				}
+				
+			}
+			
+		});
+			
+	}
+
+	
+}
+
+
+
+var displayConfirmation = function(ticketID) {
+	
+	var apiData = {
+		ticketID: ticketID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('ticketDetails',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#confirmationDisplay').html('<h1>Thank you for your order!</h1>'+data.HTML).trigger("create");
+			$.mobile.changePage($('#confirmationPage'));
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
 
 
 var loadUpcomingShows = function() {
