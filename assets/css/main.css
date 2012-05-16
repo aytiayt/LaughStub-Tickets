@@ -56,6 +56,7 @@ div.showHeader h4 { margin: 0; color: #2489CE; }
 div.venue { clear: left; padding: 10px 0 0 0; position: relative; }
 div.venue div.map { position: absolute; top: 20px; right: 0; }
 div.showHeader p { line-height: 18px; margin: 0; border-top: 1px dashed #aaa; padding: 10px 110px 0 0; }
+div.showHeader p a.venueLink { text-decoration: none; color: #2F3E46; }
 div.showHeader p.address { font-size: 12px; line-height: 16px; padding: 0 110px 0 0; border-top: none; }
 div.showCart { padding: 15px; }
 div.showCart table { width: 100%; border-collapse: collapse; }
@@ -69,5 +70,5 @@ div.showCart table tfoot td { border-bottom: none; }
 div.showCart table tfoot #buyPageTotal { font-size: 16px; text-align: left; font-weight: bold; color: #2489CE; }
 
 div.showArtists { padding: 15px; }
-
+#showArtistList { margin-top: 15px; }
 

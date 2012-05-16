@@ -143,6 +143,26 @@ var updateLocation = function(latitude,longitude) {
 */
 
 
+var updateTotal = function() {
+	
+	//Updates the subtotal shown on a ticket purchase page by looping through the rows of tickets and determining how many of each ticket is selected.
+	
+	var subTotal = 0;
+	
+	$('tr','#showTickets').each(function(i){
+		var showTierID = $(this).attr('id').replace('tierRow_','');
+		var ticketPrice = parseFloat($('#ticketPrice_'+showTierID).val());
+		var ticketQty = parseInt($('#tierQty_'+showTierID).val());
+		var ticketPrice = eval(ticketPrice*ticketQty);
+		subTotal = eval(subTotal+ticketPrice);
+	});
+	
+	$('span','#buyPageTotal').html(subTotal.toFixed(2));
+	
+}
+
+
+
 
 
 
