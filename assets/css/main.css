@@ -164,6 +164,44 @@ div.showArtists { padding: 15px; }
 #artistDisplay div.artistDetails { padding: 15px; }
 #artistDisplay div.artistDetails p { font-size: 14px; }
 
+
+
+
+
+
+
+
+
+/* Venue Details Page */
+#venueDisplay { padding: 0; }
+#venueDisplay div.venueHeader {
+	padding: 15px; 
+	-moz-box-shadow: 0 0 15px #bbb inset; 
+	-webkit-box-shadow: 0 0 15px #bbb inset; 
+	box-shadow: 0 0 15px #bbb inset;
+	background: #dfdfdf /*{c-bhover-background-color}*/;
+	font-weight: normal;
+	color: #2F3E46 /*{c-bhover-color}*/;
+	text-shadow: 0 /*{c-bhover-shadow-x}*/ 1px /*{c-bhover-shadow-y}*/ 0 /*{c-bhover-shadow-radius}*/ #ffffff /*{c-bhover-shadow-color}*/;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #f6f6f6 /*{c-bhover-background-start}*/), to( #e0e0e0 /*{c-bhover-background-end}*/)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/); /* Opera 11.10+ */
+	background-image:         linear-gradient( #f6f6f6 /*{c-bhover-background-start}*/, #e0e0e0 /*{c-bhover-background-end}*/);
+}
+#venueDisplay div.venueHeader img { width: 98px; height: 98px; border: 1px solid #fff; float: left; margin: 0 10px 0 0; }
+#venueDisplay div.venueHeader h3 { margin: 0 0 5px 0; color: #2489CE; }
+#venueDisplay div.venueHeader div.venueAddressContainer { clear: left; padding: 10px 0 0 0; }
+#venueDisplay div.venueHeader div.map { padding: 10px 0 0 0; border-top: 1px dashed #ccc; margin: 10px 0 0 0; }
+#venueDisplay div.venueHeader p.address { border-top: 1px dashed #ccc; font-size: 14px; margin: 0; padding: 10px 0 0 0; }
+#venueDisplay div.venueDetails { padding: 15px; }
+#venueDisplay div.venueDetails p { font-size: 14px; }
+
+
+
+
+
 /* Show List */
 #artistDisplay div.artistDetails h3.ui-li-heading { margin: 0.3em 0; }
 #artistDisplay div.artistDetails p.ui-li-desc span.showDate { color: #2489CE; }
@@ -219,4 +257,18 @@ div.ticketDetails p { font-size: 14px; margin: 0 0 5px 0; }
 
 
 
+
+/* Search */
+#searchEventsDisplay .ui-input-text { width: 94%; }
+#searchEventsDisplay .ui-grid-a .ui-input-datebox,
+#searchEventsDisplay .ui-grid-a .ui-input-text { width: 87%; }
+#searchEventsDisplay .localnav li { float: left; }
+#searchEventsDisplay .localnav li .ui-btn-text { font-size: 14px; }
+#searchEventsDisplay .localnav li .ui-btn-icon-left .ui-btn-inner { padding: .6em 15px .6em 35px; }
+#searchZipContainer { display: none; }
+#showSearchResults h3.ui-li-heading { margin: 0.3em 0; }
+#showSearchResults p.ui-li-desc span.showDate { color: #2489CE; }
+
+#artistSearchList,
+#venueSearchList { margin-top: 10px; }
 

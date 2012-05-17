@@ -32,7 +32,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 $(document).bind("pageinit", function() {
 	
-	// onDeviceReady();
+	
 	
 });
 
@@ -41,6 +41,8 @@ $(function() {
 	
 	loadPurchasePolicy();
 	populateExpMo();
+	
+	// onDeviceReady();
 
 });
 
@@ -53,12 +55,12 @@ function onDeviceReady() {
 		function(position) {
 			appSettings.currLat = position.coords.latitude;
 			appSettings.currLong = position.coords.longitude;
-			loadUpcomingShows();
+			loadDefaults();
 			//updateLocation(position.coords.latitude,position.coords.longitude);
 		},
 		function (error) {
-			console.log('code: ' + error.code    + '\n' + 'message: ' + error.message + '\n');
-			loadUpcomingShows();
+			//console.log('code: ' + error.code    + '\n' + 'message: ' + error.message + '\n');
+			loadDefaults();
 		}
 	);
 	
@@ -185,6 +187,131 @@ var updateCCName = function() {
 	$('#cardName').val($('#firstName').val() + ' ' + $('#lastName').val());
 }
 
+
+
+
+var toggleSearchLocation = function(option) {
+	$('#searchLocation').val(option);
+	$('#searchZipContainer').hide();
+	if(option=='current') {
+		$('#searchLocationCurrent').addClass('ui-btn-active');
+		$('#searchLocationZip').removeClass('ui-btn-active');
+	} else {
+		$('#searchLocationZip').addClass('ui-btn-active');
+		$('#searchLocationCurrent').removeClass('ui-btn-active');
+		$('#searchZipContainer').show();
+	}
+}
+
+var searchShows = function() {
+	if(($('#searchLocation').val()=='current') && (appSettings.currLat == 0) && (appSettings.currLong == 0)) {
+		navigator.geolocation.getCurrentPosition(
+			function(position) {
+				appSettings.currLat = position.coords.latitude;
+				appSettings.currLong = position.coords.longitude;
+				doSearch();
+				//updateLocation(position.coords.latitude,position.coords.longitude);
+			},
+			function (error) {
+				showAlert('Location Not Found','Please try using zip code search instead.');
+			}
+		);
+	} else {
+		doSearch();	
+	}
+}
+
+var doSearch = function() {
+	
+	var apiData = {
+		brandProperty: appSettings.brandProperty,
+		lat: appSettings.currLat,
+		long: appSettings.currLong,
+		locationType: $('#searchLocation').val(),
+		zipcode: $('#searchZip').val(),
+		zipcodeRadius: $('#searchZipRadius').val(),
+		searchTerms: $('#searchNameArtist').val(),
+		dateFrom: $('#searchDateFrom').val(),
+		dateTo: $('#searchDateTo').val()
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('showSearch',apiData), function(data) {
+	
+		if(data.SUCCESS) {
+			
+			$('#showSearchResults').html(data.HTML).trigger("create");
+			
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+
+}
+
+var searchArtists = function() {
+	
+	if($('#searchArtistName').val().length){
+		
+		var apiData = {
+			brandProperty: appSettings.brandProperty,
+			searchTerms: $('#searchArtistName').val()
+		};
+		
+		$.mobile.showPageLoadingMsg();
+		
+		$.getJSON(apiCallURL('artistSearch',apiData), function(data) {
+		
+			if(data.SUCCESS) {
+				
+				$('#artistSearchResults').html(data.HTML).trigger("create");
+				
+			}
+			
+			$.mobile.hidePageLoadingMsg();
+			
+		});
+
+	} else {
+		
+		showAlert('Invalid Search','Please enter an artist name to search.');	
+		
+	}
+	
+}
+
+var searchVenues = function() {
+	
+	if($('#searchVenueName').val().length){
+		
+		var apiData = {
+			brandProperty: appSettings.brandProperty,
+			searchTerms: $('#searchVenueName').val()
+		};
+		
+		$.mobile.showPageLoadingMsg();
+		
+		$.getJSON(apiCallURL('venueSearch',apiData), function(data) {
+		
+			if(data.SUCCESS) {
+				
+				$('#venueSearchResults').html(data.HTML).trigger("create");
+				
+			}
+			
+			$.mobile.hidePageLoadingMsg();
+			
+		});
+
+	} else {
+		
+		showAlert('Invalid Search','Please enter a venue name or city to search.');	
+		
+	}
+	
+}
 
 
 
@@ -418,6 +545,13 @@ var displayConfirmation = function(ticketID) {
 }
 
 
+var loadDefaults = function() {
+	loadUpcomingShows();
+	loadTopArtists();	
+	loadTopVenues();	
+}
+
+
 var loadUpcomingShows = function() {
 
 	var apiData = {
@@ -435,6 +569,46 @@ var loadUpcomingShows = function() {
 		}
 		
 		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
+
+
+
+var loadTopArtists = function() {
+
+	var apiData = {
+		lat: appSettings.currLat,
+		long: appSettings.currLong,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.getJSON(apiCallURL('topLocalArtists',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#topArtists').html(data.HTML).trigger("create");
+		}
+		
+	});
+	
+}
+
+
+
+var loadTopVenues = function() {
+
+	var apiData = {
+		lat: appSettings.currLat,
+		long: appSettings.currLong,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.getJSON(apiCallURL('topLocalVenues',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#topVenues').html(data.HTML).trigger("create");
+		}
 		
 	});
 	

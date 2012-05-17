@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="assets/css/jquery.mobile.theme.css" />
     <link rel="stylesheet" href="assets/css/jquery.mobile.structure-1.1.0.min.css" />
+    <link rel="stylesheet" href="assets/css/jquery.mobile.datebox-1.0.1.min.css" />
+    
     <link rel="stylesheet" href="assets/css/main.css" /> 
 
 	<script src="phonegap.js" type="text/javascript" charset="utf-8"></script>
@@ -15,17 +17,26 @@
     <script src="assets/js/jquery/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script> 
     <script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script> 
     <script src="assets/js/jquery/jquery.mobile-1.1.0.min.js" type="text/javascript" charset="utf-8"></script> 
+    <script src="assets/js/jquery/jquery.mobile.datebox-1.0.1.min.js" type="text/javascript" charset="utf-8"></script> 
+    
+    
+    
+    
+    
+    
 
 </head>
 
 <body>
 
+
 	<!-- Top Upcoming Events -->
     <div id="upcomingPage" data-role="page">
 
         <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#" onclick="loadUpcomingShows();" data-icon="refresh" data-iconpos="notext">Refresh</a>
             <h1>Top Events</h1>
-            <a href="#" onclick="loadUpcomingShows();" class="ui-btn-right" data-icon="refresh" data-iconpos="notext">Refresh</a>
+            <a href="#searchEventsPage" class="ui-btn-right" data-icon="search">Search</a>
         </div>
     
         <div data-role="content" id="upcomingShows"></div>
@@ -43,6 +54,228 @@
         
     </div>
     <!-- End of Top Upcoming Events -->
+
+
+
+
+
+	<!-- Top Artists -->
+    <div id="artistsPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#" onclick="loadTopArtists();" data-icon="refresh" data-iconpos="notext">Refresh</a>
+            <h1>Top Artists</h1>
+            <a href="#searchArtistsPage" class="ui-btn-right" data-icon="search">Search</a>
+        </div>
+    
+        <div data-role="content" id="topArtists"></div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user" data-theme="b">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Top Artists -->
+
+
+
+
+
+	<!-- Top Venues -->
+    <div id="venuesPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#" onclick="loadTopVenues();" data-icon="refresh" data-iconpos="notext">Refresh</a>
+            <h1>Top Venues</h1>
+            <a href="#searchVenuesPage" class="ui-btn-right" data-icon="search">Search</a>
+        </div>
+    
+        <div data-role="content" id="topVenues"></div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building" data-theme="b">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Top Artists -->
+
+
+
+
+
+	<!-- Search Events -->
+    <div id="searchEventsPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#upcomingPage" data-icon="star">Top</a>
+            <h1>Search</h1>
+        </div>
+    
+        <div data-role="content" id="searchEventsDisplay">
+        	
+            <div class="content-primary">
+                
+                <form id="searchEventForm">
+                
+                    <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+                        <li><a href="#" id="searchLocationCurrent" onclick="toggleSearchLocation('current');" data-role="button" class="ui-btn-active" data-icon="marker">Current Location</a></li>
+                        <li><a href="#" id="searchLocationZip" onclick="toggleSearchLocation('zip');" data-role="button" data-icon="check">Zipcode</a></li>
+                    </ul> 
+                    <input type="hidden" name="searchLocation" id="searchLocation" value="current" />
+                    
+                    <div id="searchZipContainer" data-role="fieldcontain" class="ui-hide-label">
+                    	<div class="ui-grid-a">
+                            <div class="ui-block-a">
+                            	<input type="text" name="searchZip" id="searchZip" value="" placeholder="Zip Code" />
+                            </div>
+                            <div class="ui-block-b">
+                            	<select name="searchZipRadius" id="searchZipRadius">
+                                	<option value="10">10 Mi.</option>
+                                	<option value="25">25 Mi.</option>
+                                	<option value="50">50 Mi.</option>
+                                	<option value="100">100 Mi.</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div data-role="fieldcontain" class="ui-hide-label">
+                        <label for="searchNameArtist">Search Terms:</label>
+                        <input type="text" name="searchNameArtist" id="searchNameArtist" value="" placeholder="Event Name or Artist" />
+                    </div>
+                    
+                    <div data-role="fieldcontain" class="ui-hide-label">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                            <input type="date" name="searchDateFrom" id="searchDateFrom" value="" placeholder="Date From" data-role="datebox" data-options="{'dateFormat': 'mm/dd/YYYY'}" />
+                            </div>
+                            <div class="ui-block-b">
+                            <input type="date" name="searchDateTo" id="searchDateTo" value="" placeholder="Date To" data-role="datebox" data-options="{'dateFormat': 'mm/dd/YYYY'}" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="button" name="searchShowsBtn" id="searchShowsBtn" onclick="searchShows();" value="Search" data-theme="b" />
+                    
+                </form>
+            
+                <div id="showSearchResults"></div>
+            
+            </div>
+            
+        </div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar" data-theme="b">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Search Events -->
+
+
+
+
+
+
+	<!-- Search Artists -->
+    <div id="searchArtistsPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#artistsPage" data-icon="star">Top</a>
+            <h1>Search</h1>
+        </div>
+    
+        <div data-role="content" id="searchArtistsDisplay">
+        	
+            <div class="content-primary">
+                
+                <form id="searchArtistForm">
+                    <label for="searchArtistName">Search Terms:</label>
+                    <input type="text" name="searchArtistName" id="searchArtistName" value="" placeholder="Artist Name" />
+                    <input type="button" name="searchArtistsBtn" id="searchArtistsBtn" onclick="searchArtists();" value="Search" data-theme="b" />
+                </form>
+            
+                <div id="artistSearchResults"></div>
+            
+            </div>
+            
+        </div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user" data-theme="b">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Search Artists -->
+
+
+
+
+
+	<!-- Search Venues -->
+    <div id="searchVenuesPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#venuesPage" data-icon="star">Top</a>
+            <h1>Search</h1>
+        </div>
+    
+        <div data-role="content" id="searchVenuesDisplay">
+        	
+            <div class="content-primary">
+                
+                <form id="searchVenueForm">
+                    <input type="text" name="searchVenueName" id="searchVenueName" value="" placeholder="Venue Name or City" />
+                    <input type="button" name="searchVenuesBtn" id="searchVenuesBtn" onclick="searchVenues();" value="Search" data-theme="b" />
+                </form>
+            
+                <div id="venueSearchResults"></div>
+            
+            </div>
+            
+        </div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building" data-theme="b">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Search Venues -->
 
 
 
