@@ -4,7 +4,7 @@
 	id				= "com.ticketmob.ticketapp"
 	version 		= "1.0.0">
 
-	<name>LaughStub Tickets</name>
+	<name>LaughStub</name>
 
 	<description>LaughStub's mobile ticket purchase application</description>
 
