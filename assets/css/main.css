@@ -1,4 +1,26 @@
 
+
+
+.ui-mobile, 
+.ui-mobile .ui-page, 
+.ui-mobile [data-role="page"],
+.ui-mobile [data-role="dialog"], 
+.ui-page, 
+.ui-mobile 
+.ui-page-active {
+      /* overflow: hidden; */
+      -webkit-backface-visibility: hidden;
+}
+
+
+
+/* Alert */
+#alertContent { margin: 10px auto; padding: 15px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; background: #fff; -moz-box-shadow: 0px 0px 12px rgba(0,0,0,.6); -webkit-box-shadow: 0px 0px 12px rgba(0,0,0,.6); box-shadow: 0px 0px 12px rgba(0,0,0,.6); }
+#alertContent h3 { font-size: 22px; font-weight: bold; }
+#alertContent p { margin: 10px auto 20px auto; }
+
+
+
 /* Loader */
 .ui-loader { background-color: #fff!important; top: 0!important; left: 0!important; width: 100%!important; height: 100%!important; margin: 0!important; border-radius: 0!important; padding: 50%!important; }
 .ui-loader .ui-icon-loading { margin-left: -22px; }
@@ -218,7 +240,8 @@ div.showArtists { padding: 15px; }
 
 
 /* Ticket Details */
-#confirmationDisplay { padding: 0; }
+#confirmationDisplay,
+#ticketDisplay { padding: 0; }
 #confirmationDisplay h1 { margin: 0; padding: 15px; font-size: 18px; }
 div.ticketDetails div.ticketContent {
 	padding: 15px; 
@@ -273,3 +296,13 @@ div.barcodeContainer img { margin: 0 auto; width: 100%; }
 #artistSearchList,
 #venueSearchList { margin-top: 10px; }
 
+
+
+
+/* Account */
+#accountDisplay h3 { margin: 0; }
+#accountDisplay p { margin: 0; }
+#accountList { margin-top: 15px; }
+
+#accountForm .ui-field-contain { padding: 0.4em 0; }
+#accountForm .ui-grid-a input.ui-input-text { width: 82%; }

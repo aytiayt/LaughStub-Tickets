@@ -18,12 +18,6 @@
     <script src="assets/js/app.js" type="text/javascript" charset="utf-8"></script> 
     <script src="assets/js/jquery/jquery.mobile-1.1.0.min.js" type="text/javascript" charset="utf-8"></script> 
     <script src="assets/js/jquery/jquery.mobile.datebox-1.0.1.min.js" type="text/javascript" charset="utf-8"></script> 
-    
-    
-    
-    
-    
-    
 
 </head>
 
@@ -452,6 +446,62 @@
 
 
 
+
+	<!-- Ticket Page -->
+    <div id="ticketPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+            <h1>Ticket Details</h1>
+        </div>
+    
+        <div data-role="content" id="ticketDisplay"></div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard" data-theme="b">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Ticket Page -->
+
+
+
+
+
+	<!-- Order History Page -->
+    <div id="orderHistoryPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false">
+            <a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+            <h1>Order History</h1>
+        </div>
+    
+        <div data-role="content" id="orderHistoryDisplay"></div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard" data-theme="b">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Order History Page -->
+
+
+
+
 	<!-- Venue Page -->
     <div id="venuePage" data-role="page">
 
@@ -509,33 +559,57 @@
 
 
 
-	<!-- Location Page -->
-    <div id="locationPage" data-role="page">
+	<!-- Account Page -->
+    <div id="accountPage" data-role="page">
 
-        <div data-role="header" data-position="fixed" data-tap-toggle="false">
-            <h1>My Location</h1>
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" id="accountHeader">
+            <h1>My Account</h1>
         </div>
     
-        <div data-role="content" id="locationContent">
+        <div data-role="content" id="accountDisplay"></div>
         
-            <h3>Please Set Your Location:</h3>
-            
-            <form action="#">
-            
-                <label for="zipcode">Zip Code:</label>
-                <input type="text" name="zipcode" id="zipcode" value=""  />
-            	<input type="submit" name="updateZip" id="updateZip" value="Set Location" onclick="updateZipcode();return false;" />
-            
-            	<p align="center">- Or -</p>
-                
-                <input type="button" name="getLocation" id="getLocation" value="Use My Current Location" onclick="getCurrentLocation();" data-icon="refresh" />
-            
-            </form>
-        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard" data-theme="b">Account</a></li>
+                </ul>
+            </div>
         </div>
         
     </div>
-    <!-- End of Location Page -->
+    <!-- End of Account Page -->
+
+
+
+
+
+
+	<!-- Account Edit Page -->
+    <div id="accountEditPage" data-role="page">
+
+        <div data-role="header" data-position="fixed" data-tap-toggle="false" id="accountHeader">
+            <a href="#" data-rel="back" data-icon="arrow-l">Back</a>
+            <h1>Edit Account</h1>
+        </div>
+    
+        <div data-role="content" id="accountEditDisplay"></div>
+        
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar" data-grid="c">
+                <ul>
+                    <li><a href="#upcomingPage" id="nav-events" data-icon="calendar">Events</a></li>
+                    <li><a href="#venuesPage" id="nav-venues" data-icon="building">Venues</a></li>
+                    <li><a href="#artistsPage" id="nav-artists" data-icon="user">Artists</a></li>
+                    <li><a href="#accountPage" id="nav-account" data-icon="idcard" data-theme="b">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <!-- End of Edit Account Page -->
 
 
 
@@ -558,7 +632,7 @@
 
 
     <!--- Alert Box --->
-    <div data-role="dialog" data-theme="b" id="alertBox">
+    <div data-role="page" data-theme="b" id="alertBox">
         <div data-role="content">
             <div id="alertContent">
                 <h3></h3>

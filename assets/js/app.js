@@ -9,15 +9,15 @@ var appSettings = {
 		currLat: 0,
 		currLong: 0,
 		userID: 0,
-		brandProperty: "LS",
-		dataAPI: "http://www.laughstub.com/components/ticketAppAPI.cfc",
+		brandProperty: 'LS',
+		dataAPI: 'http://www.laughstub.com/components/ticketAppAPI.cfc',
 		online: navigator.onLine || false
 	};
 
 
 
 
-$(document).bind("mobileinit", function() {
+$(document).bind('mobileinit', function() {
 	
     // Make your jQuery Mobile framework configuration changes here!
 	$.support.cors = true;
@@ -28,9 +28,9 @@ $(document).bind("mobileinit", function() {
 	
 });
 
-document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false);
 
-$(document).bind("pageinit", function() {
+$(document).bind('pageinit', function() {
 	
 	
 	
@@ -42,7 +42,7 @@ $(function() {
 	loadPurchasePolicy();
 	populateExpMo();
 	
-	//onDeviceReady();
+	// onDeviceReady();
 
 });
 
@@ -64,7 +64,7 @@ function onDeviceReady() {
 		}
 	);
 	
-	//createDB();
+	createDB();
 	//navigator.network.isReachable('ticketmob.com', reachableCallback);
 	
 }
@@ -83,73 +83,57 @@ function reachableCallback(reachability) {
 }
 
 
-/*
+
+
+
 function createDB() {  
-	db = window.openDatabase("LaughStubTicketDB", "1.0", "LaughStub Tickets Local Data Storage", 200000);
-	db.transaction(verifDB, dbEmpty, function(){});
+	db = window.openDatabase(appSettings.brandProperty + 'TicketDB', '1.0', appSettings.brandProperty + ' Tickets Local Data Storage', 200000);
+	db.transaction(verifDB, dbEmpty, function(){ 
+		// success
+	});
 }
 function verifDB(tx) {
-	tx.executeSql("SELECT currLat, currLong, userID FROM userOptions", [], dbNotEmpty, dbEmpty);
+	tx.executeSql('SELECT userID FROM userOptions', [], dbNotEmpty, dbEmpty);
 }
 function dbEmpty(tx) {
-	db.transaction(populateDB, errorCB, successCB);
+	db.transaction(populateDB, errorDB, successCB);
 }
 function dbNotEmpty(tx, result){
 	var userData = result.rows.item(0);
-	appSettings.currLat = userData.currLat;
-	appSettings.currLong = userData.currLong;
 	appSettings.userID = userData.userID;
+	loadAccount();
+	//console.log(appSettings);
 }
 function populateDB(tx) {
-	tx.executeSql("DROP TABLE IF EXISTS userOptions");
-    tx.executeSql("CREATE TABLE IF NOT EXISTS userOptions (id INTEGER PRIMARY KEY AUTOINCREMENT, currLat FLOAT, currLong FLOAT, userID INTEGER)");
-    tx.executeSql("INSERT INTO userOptions (currLat,currLong,userID) VALUES (0,0,0)");
+	tx.executeSql('DROP TABLE IF EXISTS userOptions');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS userOptions (id INTEGER PRIMARY KEY AUTOINCREMENT, userID INTEGER)');
+    tx.executeSql('INSERT INTO userOptions (userID) VALUES (0)');
 }
-function errorCB(error) {
-	console.log(errorCB);
+function errorDB(error) {
+	// console.log(error);
 }
 function successCB() {
-	appSettings.currLat = 0;
-	appSettings.currLong = 0;
 	appSettings.userID = 0;
-	getCurrentLocation();
+	loadAccount();
 };
 
-
-
-
-var updateLocation = function(latitude,longitude) {
-	db.transaction(
-		function(tx){
-			tx.executeSql(
-				"UPDATE userOptions SET currLat=:latitude, currLong=:longitude", [latitude,longitude],
-				function(){
-					//Success
-				},
-				function(error){
-					//Fail	
-					console.log(error);
-				}
-			);
-		}, 
-		function(){
-			// Fail
-		},
-		function(){
-			//Success
-		}
-	);
-	
+function updateDB() {
+	db.transaction(updateQuery, errorDB);
+}
+function updateQuery(tx) {
+	tx.executeSql('UPDATE userOptions SET userID=:userID', [appSettings.userID], querySuccess, errorDB);
+}
+function querySuccess(tx, results) {
+	//console.log(results);
 }
 
-*/
 
 
 
 var showAlert = function(title,content) {
 	$('h3','#alertBox').html(title);
 	$('p','#alertBox').html(content);
-	$.mobile.changePage("#alertBox");
+	$.mobile.changePage('#alertBox');
 }
 
 
@@ -241,7 +225,7 @@ var doSearch = function() {
 	
 		if(data.SUCCESS) {
 			
-			$('#showSearchResults').html(data.HTML).trigger("create");
+			$('#showSearchResults').html(data.HTML).trigger('create');
 			
 		}
 		
@@ -266,7 +250,7 @@ var searchArtists = function() {
 		
 			if(data.SUCCESS) {
 				
-				$('#artistSearchResults').html(data.HTML).trigger("create");
+				$('#artistSearchResults').html(data.HTML).trigger('create');
 				
 			}
 			
@@ -297,7 +281,7 @@ var searchVenues = function() {
 		
 			if(data.SUCCESS) {
 				
-				$('#venueSearchResults').html(data.HTML).trigger("create");
+				$('#venueSearchResults').html(data.HTML).trigger('create');
 				
 			}
 			
@@ -422,7 +406,7 @@ var updateCart = function(showTimingID,showTierIDList,showTierQtyList) {
 			$('#checkoutTotal').val(data.TOTAL);
 			$('#checkoutQty').val(data.QTY);
 			
-			$('#shoppingCart').html(data.CARTDISPLAY).trigger("create");
+			$('#shoppingCart').html(data.CARTDISPLAY).trigger('create');
 			
 			$.mobile.changePage($('#cartPage'));
 			
@@ -438,38 +422,38 @@ var updateCart = function(showTimingID,showTierIDList,showTierQtyList) {
 var doCheckout = function() {
 	
 	//validate the checkout form
-	var errorMsg = "";
+	var errorMsg = '';
 	
 	// First and Last
 	if($('#firstName').val().length==0) {
-		errorMsg = errorMsg + "Please enter your first name<br />"	
+		errorMsg = errorMsg + 'Please enter your first name<br />';
 	}
 	if($('#lastName').val().length==0) {
-		errorMsg = errorMsg + "Please enter your last name<br />"	
+		errorMsg = errorMsg + 'Please enter your last name<br />';	
 	}
 	// Email
 	if (!_CF_checkEmail($('#emailAddress').val(), true)) {
-		errorMsg = errorMsg + "Please enter a valid email address<br />"	
+		errorMsg = errorMsg + 'Please enter a valid email address<br />';	
 	}
 	// Card Name
 	if($('#cardName').val().length==0) {
-		errorMsg = errorMsg + "Please enter the name on the credit card<br />"	
+		errorMsg = errorMsg + 'Please enter the name on the credit card<br />';
 	}
 	// Credit Card
 	if (!_CF_checkcreditcard($('#cardNumber').val(), true)) {
-		errorMsg = errorMsg + "Please enter a valid credit card number<br />";
+		errorMsg = errorMsg + 'Please enter a valid credit card number<br />';
 	}
 	// Card CVV
 	if (!_CF_checkinteger($('#cardCVV').val(), true)) {
-		errorMsg = errorMsg + "Please enter a valid credit card CVV code<br />";
+		errorMsg = errorMsg + 'Please enter a valid credit card CVV code<br />';
 	}
 	// Billing Zip
 	if (!_CF_checkzip($('#billingZip').val(), true)) {
-		errorMsg = errorMsg + "Please enter a valid billing zip code<br />";
+		errorMsg = errorMsg + 'Please enter a valid billing zip code<br />';
 	}
 	// Make sure phone is valid if entered
 	if (!_CF_checkphone($('#phoneNumber').val(), false)) {
-		errorMsg = errorMsg + "Please enter a valid phone number<br />"	
+		errorMsg = errorMsg + 'Please enter a valid phone number<br />';
 	}
 	
 	if(errorMsg.length) {
@@ -552,7 +536,7 @@ var displayConfirmation = function(ticketID) {
 	$.getJSON(apiCallURL('ticketDetails',apiData), function(data) {
 		
 		if(data.SUCCESS) {
-			$('#confirmationDisplay').html('<h1>Thank you for your order!</h1>'+data.HTML).trigger("create");
+			$('#confirmationDisplay').html('<h1>Thank you for your order!</h1>'+data.HTML).trigger('create');
 			$.mobile.changePage($('#confirmationPage'));
 		}
 		
@@ -583,7 +567,7 @@ var loadUpcomingShows = function() {
 	$.getJSON(apiCallURL('topLocalShows',apiData), function(data) {
 		
 		if(data.SUCCESS) {
-			$('#upcomingShows').html(data.HTML).trigger("create");
+			$('#upcomingShows').html(data.HTML).trigger('create');
 		}
 		
 		$.mobile.hidePageLoadingMsg();
@@ -605,7 +589,7 @@ var loadTopArtists = function() {
 	$.getJSON(apiCallURL('topLocalArtists',apiData), function(data) {
 		
 		if(data.SUCCESS) {
-			$('#topArtists').html(data.HTML).trigger("create");
+			$('#topArtists').html(data.HTML).trigger('create');
 		}
 		
 	});
@@ -625,12 +609,178 @@ var loadTopVenues = function() {
 	$.getJSON(apiCallURL('topLocalVenues',apiData), function(data) {
 		
 		if(data.SUCCESS) {
-			$('#topVenues').html(data.HTML).trigger("create");
+			$('#topVenues').html(data.HTML).trigger('create');
 		}
 		
 	});
 	
 }
+
+
+var loadAccount = function() {
+
+	if(appSettings.userID==0) {
+		$('#accountHeader').html('<h1 class="ui-title" role="heading" aria-level="1">My Account</h1>');
+	} else {
+		$('#accountHeader').html('<h1 class="ui-title" role="heading" aria-level="1">My Account</h1><a href="#" onclick="doLogout();" class="ui-btn-right ui-btn ui-btn-up-a ui-shadow ui-btn-corner-all ui-btn-icon-left" data-icon="delete" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="a"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Logout</span><span class="ui-icon ui-icon-delete ui-icon-shadow">&nbsp;</span></span></a>');
+	}
+
+	var apiData = {
+		userID: appSettings.userID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.getJSON(apiCallURL('userAccount',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#accountDisplay').html(data.HTML).trigger('create');
+		}
+		
+	});
+	
+}
+
+var viewOrders = function() {
+	
+	var apiData = {
+		userID: appSettings.userID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('orderHistory',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#orderHistoryDisplay').html(data.HTML).trigger('create');
+			$.mobile.changePage($('#orderHistoryPage'));
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+	
+}
+
+var viewTicket = function(ticketID) {
+	
+	var apiData = {
+		ticketID: ticketID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('ticketDetails',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#ticketDisplay').html(data.HTML).trigger('create');
+			$.mobile.changePage($('#ticketPage'));
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+
+	
+}
+
+
+var editAccount = function() {
+	
+	var apiData = {
+		userID: appSettings.userID,
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('editAccount',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#accountEditDisplay').html(data.HTML).trigger('create');
+			$.mobile.changePage($('#accountEditPage'));
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+
+}
+
+
+var updateAccount = function() {
+	
+	var apiData = {
+		userID: appSettings.userID,
+		firstName: $('#accountFirstName').val(),
+		lastName: $('#accountLastName').val(),
+		emailAddress: $('#accountEmailAddress').val(),
+		password: $('#accountPassword').val(),
+		password2: $('#accountPassword2').val(),
+		brandProperty: appSettings.brandProperty
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('updateAccount',apiData), function(data) {
+		
+		if(data.SUCCESS) {
+			$('#accountEditDisplay').html(data.HTML).trigger('create');
+			$.mobile.silentScroll(0);
+			window.setTimeout(function(){
+				$('#accountMessage').fadeOut(500,function(){
+					$(this).remove();
+				});
+			},5000);
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+
+}
+
+
+var doLogin = function() {
+	
+	var apiData = {
+		brandProperty: appSettings.brandProperty,
+		username: $('#username').val(),
+		password: $('#password').val()
+	};
+	
+	$.mobile.showPageLoadingMsg();
+	
+	$.getJSON(apiCallURL('checkLogin',apiData), function(data) {
+	
+		if(data.SUCCESS) {
+			
+			if(data.ERROR==0) {
+				appSettings.userID = data.USERID;
+				updateDB();
+				loadAccount();
+			} else {
+				$('#password').val('');
+				showAlert('Invalid Login',data.ERRORMSG);	
+			}
+			
+		}
+		
+		$.mobile.hidePageLoadingMsg();
+		
+	});
+
+}
+
+
+var doLogout = function() {
+	appSettings.userID = 0;
+	updateDB();
+	loadAccount();
+}
+
+
 
 
 var displayShow = function(showTimingID) {
@@ -668,7 +818,7 @@ var displayVenue = function(venueID) {
 	$.getJSON(apiCallURL('getVenue',apiData), function(data) {
 		
 		if(data.SUCCESS) {
-			$('#venueDisplay').html(data.HTML).trigger("create");
+			$('#venueDisplay').html(data.HTML).trigger('create');
 			$.mobile.changePage($('#venuePage'));
 		}
 		
@@ -691,7 +841,7 @@ var displayArtist = function(artistID) {
 	$.getJSON(apiCallURL('getArtist',apiData), function(data) {
 		
 		if(data.SUCCESS) {
-			$('#artistDisplay').html(data.HTML).trigger("create");
+			$('#artistDisplay').html(data.HTML).trigger('create');
 			$.mobile.changePage($('#artistPage'));
 		}
 		
@@ -721,7 +871,7 @@ var loadPurchasePolicy = function(artistID) {
 
 var apiCallURL = function(method,data) {
 	
-	var queryString = "";
+	var queryString = '';
 	
 	for (var key in data) {
 		if (data.hasOwnProperty(key)) {
