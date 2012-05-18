@@ -254,7 +254,8 @@ div.ticketDetails h2 {
 	background-image:         linear-gradient( #6facd5 /*{b-bar-background-start}*/, #497bae /*{b-bar-background-end}*/);
 }
 div.ticketDetails p { font-size: 14px; margin: 0 0 5px 0; }
-
+div.barcodeContainer { background: #fff; box-shadow: 0 0 15px #999; margin: 10px 0 0 0; }
+div.barcodeContainer img { margin: 0 auto; width: 100%; }
 
 
 

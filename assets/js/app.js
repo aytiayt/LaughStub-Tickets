@@ -42,7 +42,7 @@ $(function() {
 	loadPurchasePolicy();
 	populateExpMo();
 	
-	// onDeviceReady();
+	//onDeviceReady();
 
 });
 
@@ -516,7 +516,6 @@ var doCheckout = function() {
 		});
 			
 	}
-
 	
 }
 
@@ -524,6 +523,25 @@ var doCheckout = function() {
 
 var displayConfirmation = function(ticketID) {
 	
+	// Clear out checkout fields
+	$('#checkoutShowTierList').val('');
+	$('#checkoutShowTierIDList').val('');
+	$('#checkoutShowTierQtyList').val('');
+	$('#checkoutShowTimingID').val(0);
+	$('#checkoutCouponID').val(0);
+	$('#checkoutTotal').val(0);
+	$('#checkoutQty').val(0);
+	$('#firstName').val('');
+	$('#lastName').val('');
+	$('#emailAddress').val('');
+	$('#phoneNumber').val('');
+	$('#cardName').val('');
+	$('#cardNumber').val('');
+	$('#expMo').val(1);
+	$('#expYr').val(1);
+	$('#billingZip').val('');
+	$('#cardCVV').val('');
+			
 	var apiData = {
 		ticketID: ticketID,
 		brandProperty: appSettings.brandProperty
