@@ -11,7 +11,7 @@
 	<author href="http://www.ticketmob.com" email="jonah@ticketmob.com">Jonah Fuller</author>
 
 	<icon src="Icon.png" />
-	<icon src="icons/ios/Icon.png" width="57" height="57" />
+	<icon src="icons/ios/icon.png" width="57" height="57" />
 	<icon src="icons/ios/Icon-72.png" gap:platform="ios" width="72" height="72" />
 	<icon src="icons/ios/Icon-72@2x.png" width="114" height="114" />
 
@@ -23,7 +23,7 @@
 	<preference name="webviewbounce" value="false" />
 	<preference name="stay-in-webview" value="false" />
 	
-	<gap:splash src="Default.png" />
+	<gap:splash src="splash.png" />
 	<gap:splash src="splash/ios/Default.png" width="320" height="480" />
 	<gap:splash src="splash/ios/Default_at_2x.png" width="640" height="960" />
 	
